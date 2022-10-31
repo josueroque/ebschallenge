@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, FormControl, Typography, Button } from "@mui/material";
 import Menu from "../components/Menu";
-import { createContact } from "../services/apiService";
+import { createContact, editContact, getContact } from "../services/apiService";
 import swal from "sweetalert";
+import { useParams } from "react-router";
 const Add = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [action, setAction] = useState("Create");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createContact({ name, email });
+      if (action === "Create") {
+        await createContact({ name, email });
+      } else {
+        await editContact({ id: params.id, name, email });
+      }
       swal({ title: "success", icon: "success" });
     } catch (error) {
       swal({ title: "error", icon: "error" });
     }
   };
+  const params = useParams();
+  const setContact = async (id) => {
+    const response = await getContact(id);
+    setEmail(response.data.email);
+    setName(response.data.name);
+  };
+  useEffect(() => {
+    if (params?.id) {
+      setAction("Edit");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (action === "Edit") setContact(params?.id);
+  }, [action]);
+
   return (
     <>
       <Menu />
@@ -22,7 +45,7 @@ const Add = () => {
         <form onSubmit={handleSubmit}>
           <Typography variant="h5" align="center">
             {" "}
-            Add new Contact
+            {`${action} Contact `}
           </Typography>
           <FormControl required fullWidth style={{ marginBottom: "20px" }}>
             <TextField

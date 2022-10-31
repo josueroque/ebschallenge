@@ -8,6 +8,7 @@ function App() {
         <Routes>
           <Route path="/list" element={<List />} />
           <Route path="/add" element={<Add />} />
+          <Route path="/edit/:id" element={<Add />} />
           <Route path="/" element={<List />} />
         </Routes>
       </BrowserRouter>

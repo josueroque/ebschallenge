@@ -13,11 +13,12 @@ import {
 import { tableCellClasses } from "@mui/material/TableCell";
 import Menu from "../components/Menu";
 import { styled } from "@mui/material/styles";
-
+import { useNavigate } from "react-router";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -33,13 +34,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+const columns = ["Id", "Name", "Email"];
 const List = () => {
-  const columns = ["id", "name", "email"];
   const [contactsList, setContactsList] = useState([]);
+  const navigate = useNavigate();
   const fetchContacts = async () => {
     try {
       const response = await getContacts();
-      console.log(response);
       setContactsList(response.data);
     } catch (error) {
       swal({
@@ -79,11 +80,17 @@ const List = () => {
         <TableHead>
           <TableRow>
             {columns.map((item) => (
-              <TableCell style={{ fontWeight: "bold" }} key={item}>
+              <TableCell
+                align="center"
+                style={{ fontWeight: "bold" }}
+                key={item}
+              >
                 {item}
               </TableCell>
             ))}
-            <TableCell>Action</TableCell>
+            <TableCell align="center" style={{ fontWeight: "bold" }}>
+              Action
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -98,6 +105,7 @@ const List = () => {
                     <Button
                       variant="contained"
                       onClick={() => deleteContact(item.id)}
+                      style={{ width: "100px" }}
                     >
                       Delete
                     </Button>
@@ -105,7 +113,8 @@ const List = () => {
                   {
                     <Button
                       variant="contained"
-                      onClick={() => console.log(item.id)}
+                      onClick={() => navigate(`/edit/${item.id}`)}
+                      style={{ width: "100px" }}
                     >
                       Edit
                     </Button>

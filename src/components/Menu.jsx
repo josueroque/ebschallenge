@@ -8,17 +8,17 @@ const Menu = () => {
         justifyContent: "center",
       }}
     >
-      <Link to="/list" style={{ textDecoration: "none", margin: "10px" }}>
+      <Link
+        to="/list"
+        style={{ textDecoration: "none", margin: "10px", fontWeight: "bolder" }}
+      >
         Contacts List
       </Link>
-      <Link to="/add" style={{ textDecoration: "none", margin: "10px" }}>
-        Add Contact
-      </Link>
       <Link
-        to="/contact/:id"
-        style={{ textDecoration: "none", margin: "10px" }}
+        to="/add"
+        style={{ textDecoration: "none", margin: "10px", fontWeight: "bolder" }}
       >
-        Edit Contact
+        Add Contact
       </Link>
     </div>
   );
