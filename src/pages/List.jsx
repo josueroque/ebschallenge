@@ -53,7 +53,7 @@ const List = () => {
   const deleteContact = async (id) => {
     try {
       await deleteContacts(id);
-
+      await fetchContacts();
       swal({ title: "Success", text: "Item deleted!", icon: "success" });
     } catch (error) {
       swal({
@@ -102,6 +102,14 @@ const List = () => {
                       Delete
                     </Button>
                   }{" "}
+                  {
+                    <Button
+                      variant="contained"
+                      onClick={() => console.log(item.id)}
+                    >
+                      Edit
+                    </Button>
+                  }
                 </StyledTableCell>
               </StyledTableRow>
             ))}

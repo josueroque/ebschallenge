@@ -9,3 +9,7 @@ export const getContacts = () => {
 export const deleteContacts = (id) => {
   return axios.delete(`${baseUrl}api/contact/${id}`);
 };
+
+export const createContact = (contact) => {
+  return axios.post(`${baseUrl}api/contact`, contact);
+};

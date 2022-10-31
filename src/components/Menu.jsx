@@ -11,7 +11,7 @@ const Menu = () => {
       <Link to="/list" style={{ textDecoration: "none", margin: "10px" }}>
         Contacts List
       </Link>
-      <Link to="/contact" style={{ textDecoration: "none", margin: "10px" }}>
+      <Link to="/add" style={{ textDecoration: "none", margin: "10px" }}>
         Add Contact
       </Link>
       <Link
